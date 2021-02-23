@@ -52,8 +52,8 @@ button:hover {
 body {
     text-align: center;
     background-color: white;
-    transition: background-color .6s;
-    transition: color .6s;
+    transition: all .4s;
+    /* transition: color .6s; */
     margin: 0;
 }
 
@@ -191,6 +191,10 @@ a.book-preview{
     border: 10px solid #ac3b61;
     border-radius: 25px;
 }
+.book-details img{
+    width: 300px;
+    height: 400px;
+}
 
 .book-details .aside {
     display: flex;
@@ -255,6 +259,7 @@ a.book-preview{
 
     .book-details img {
         width: 150px;
+        height: 200px;
     }
 
     .book-details .aside {
@@ -362,6 +367,7 @@ form button{
     border: 1px solid black;
     display: flex;
     justify-content: space-between;
+    padding: 10px;
 }
 .add-btn{
     width:fit-content;

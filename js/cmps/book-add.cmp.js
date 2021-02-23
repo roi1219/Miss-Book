@@ -35,21 +35,21 @@ export default {
             console.log(book);
             const bookToSave = {
                 id: null,
-                title: book.volumeInfo.title,
-                subtitle: book.volumeInfo.subtitle,
-                authors: book.volumeInfo.authors,
-                publishedDate: book.volumeInfo.publishedDate,
-                description: book.volumeInfo.description,
-                pageCount: book.volumeInfo.pageCount,
-                categories: book.volumeInfo.categories,
+                title: book.volumeInfo.title||'Unknow',
+                subtitle: book.volumeInfo.subtitle||'Unknow',
+                authors: book.volumeInfo.authors||'Unknow',
+                publishedDate: book.volumeInfo.publishedDate||'Unknown',
+                description: book.volumeInfo.description||'Unknow',
+                pageCount: book.volumeInfo.pageCount||'Unknow',
+                categories: book.volumeInfo.categories || [],
                 thumbnail: book.volumeInfo.imageLinks.thumbnail,
-                language: book.volumeInfo.language,
+                language: book.volumeInfo.language||'Unknow',
                 listPrice: {
                     amount: 109,
                     currencyCode: 'EUR',
                     isOnSale: false
                 },
-                reviews:[]
+                reviews: []
             }
             bookService.save(bookToSave);
             this.$router.push('/book');

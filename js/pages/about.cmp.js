@@ -1,8 +1,11 @@
 export default {
     template: `
     <section class="home-page">
-        <h1>about!!!</h1>
-        <img src="img/reading.jpg" alt="books" width="70%">
+        <nav>
+            <router-link to="/about/team">About our Team</router-link> |
+            <router-link to="/about/services">About our Services</router-link>
+        </nav>
+        <router-view />        <img src="img/reading.jpg" alt="books" width="70%">
     </section>
     `,
     data() {

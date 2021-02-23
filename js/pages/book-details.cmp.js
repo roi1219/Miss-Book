@@ -23,8 +23,9 @@ export default {
                 </p>
                 <p :class="{expensive:book.listPrice.amount>150,lowcost:book.listPrice.amount<20}"><strong>Price:</strong>{{formattedPrice}}</p>
                 <img v-if="book.listPrice.isOnSale" src="img/sale.svg" alt="!!!ON-SALE!!!">
-                <button @click="$emit('close')">Close</button>
+                <router-link :to="nextBookLink" class="back">Next Book</router-link>
                 <router-link to="/book" class="back">Back</router-link>
+                <router-link :to="previousBookLink" class="back">Previous Book</router-link>
             </div>
         </section>
         <review-add :book="book"/>
@@ -32,10 +33,31 @@ export default {
     `,
     data() {
         return {
-            book: null
+            book: null,
+            nextBookId: null,
+            previousBookId: null
         }
     },
     methods: {
+        getIds() {
+            bookService.query().then(res => {
+                console.log('getting idss')
+                console.log('res:', this.book)
+                const idx = res.findIndex(book => book.id === this.book.id)
+                if (idx === res.length-1){
+                    this.previousBookId=res[idx-1].id;
+                    this.nextBookId = res[0].id;
+                } 
+                else if (idx === 0){
+                    this.nextBookId=res[1].id;
+                    this.previousBookId = res[res.length - 1].id;
+                } 
+                else{
+                    this.previousBookId = res[idx - 1].id;
+                    this.nextBookId = res[idx + 1].id;
+                } 
+            })
+        }
     },
     computed: {
         formattedPrice() {
@@ -57,6 +79,12 @@ export default {
         getCategory() {
             return this.book.categories.join(',');
 
+        },
+        nextBookLink() {
+            return '/book/' + this.nextBookId;
+        },
+        previousBookLink() {
+            return '/book/' + this.previousBookId;
         }
     },
     components: {
@@ -66,6 +94,17 @@ export default {
     created() {
         const id = this.$route.params.bookId;
         bookService.getById(id)
-            .then(book => this.book = book);
+            .then(book => this.book = book)
+            .then(() => this.getIds());
+    },
+    watch: {
+        '$route.params.bookId'(id) {
+            console.log('Changed to', id);
+            bookService.getById(id)
+                .then(book => {
+                    this.book = book;
+                })
+                .then(()=>this.getIds())
+        }
     }
 }
