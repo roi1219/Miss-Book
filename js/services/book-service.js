@@ -5,7 +5,7 @@ const BOOKS_KEY = 'books';
 
 setBooks();
 function setBooks() {
-    const gBooks=utilsService.loadFromStorage(BOOKS_KEY);
+    let gBooks=utilsService.loadFromStorage(BOOKS_KEY);
     if(!gBooks){
     gBooks = [
         {
