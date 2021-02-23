@@ -455,8 +455,31 @@ export const bookService = {
     query,
     remove,
     save,
-    getById
-    // getEmptyBook,
+    getById,
+    getGoogleBooks
+}
+
+function getGoogleBooks(book){
+    // if(utilsService.loadFromStorage('googleBooks')) {
+    //     console.log('FROM LOCAL STORAGE');
+    //     return Promise.resolve(loadFromStorage('googleBooks'));
+    // }
+    // else{
+        console.log('FROM API REQUEST');
+        return axios.get(`https://www.googleapis.com/books/v1/volumes?printType=books&q=effective%20${book}`)
+        .then(res => {
+            utilsService.saveToStorage('googleBooks',res.data);
+            return res.data;
+        })
+        // .then(data=>data.items)
+        // .then(items=>{
+        //     const info=items.filter(item=>item.volumeInfo);
+        //     console.log('info:', info)
+        // })
+        .catch(err => {
+            console.log('Couldnt retrive data', err);
+        })
+    // }
 }
 
 function query() {

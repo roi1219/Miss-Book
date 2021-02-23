@@ -345,3 +345,25 @@ form button{
 .error{
     border:1px solid red;
 }
+.add-book{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.add-book-list{
+    flex-direction: column;
+    list-style: circle;
+}
+.add-book-list li{
+    margin:5px;
+    height: fit-content;
+    width: 400px;
+    border-radius: 0;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+.add-btn{
+    width:fit-content;
+    height: fit-content;
+}
