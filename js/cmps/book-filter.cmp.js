@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         setFilter() {
-            this.$emit('filtered', this.filterBy)
+            this.$emit('filter', this.filterBy)
         }
     }
 }
